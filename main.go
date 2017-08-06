@@ -63,9 +63,14 @@ func check(err error) {
 var config Config
 
 func main() {
-	var configPath string
+	var (
+		configPath string
+		first      bool
+	)
 	flag.StringVar(&configPath, "c", "config.yml", "config file path")
 	flag.StringVar(&configPath, "config", "config.yml", "config file path")
+	flag.BoolVar(&first, "f", false, "not notify at first time")
+	flag.BoolVar(&first, "first", false, "not notify at first time")
 	flag.Parse()
 
 	buf, err := ioutil.ReadFile(configPath)
@@ -78,6 +83,10 @@ func main() {
 		text := stdin.Text()
 		switch text {
 		case "open":
+			if first {
+				first = false
+				continue
+			}
 			notify("課金通知botの監視を始めました")
 		case "close":
 			notify("課金通知botが止まりました、管理者をしばいてください")
