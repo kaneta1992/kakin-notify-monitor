@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"github.com/bluele/slack"
 	"github.com/utahta/go-linenotify"
 	"gopkg.in/yaml.v2"
@@ -62,7 +63,12 @@ func check(err error) {
 var config Config
 
 func main() {
-	buf, err := ioutil.ReadFile("config.yml")
+	var configPath string
+	flag.StringVar(&configPath, "c", "config.yml", "config file path")
+	flag.StringVar(&configPath, "config", "config.yml", "config file path")
+	flag.Parse()
+
+	buf, err := ioutil.ReadFile(configPath)
 	check(err)
 	err = yaml.Unmarshal(buf, &config)
 	check(err)
