@@ -87,9 +87,9 @@ func main() {
 				first = false
 				continue
 			}
-			notify("課金通知botの監視を始めました")
+			notify("課金監視botの監視を始めました")
 		case "close":
-			notify("課金通知botが止まりました、管理者をしばいてください")
+			notify("課金監視botが止まりました\n課金する可能性があるので管理者をしばいてください")
 		}
 	}
 }
